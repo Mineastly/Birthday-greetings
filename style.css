@@ -1,0 +1,459 @@
+/* Add custom accent colors as CSS variables */
+:root {
+    --accent1: #c9a9a6; /* Dark Dusty Rose Pink | */
+    --accent2: #7d1201; /* Dark Cherry Red | */  
+    --accent3: #800000; /* Maroon */
+    --accent4: #654321; /* Dark Brown | */
+    --accent5: #a95c68; /* Puce | */
+    --accent6: #de5d83; /* Blush Pink | */
+    --accent7: #ffe5b4; /* Peach | */  
+}
+
+/* Global reset to remove padding/margins and enforce border-box */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Prevent any scroll on the root elements */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Custom font */
+@font-face {
+  font-family: 'Inkedgod';
+  src: url('iNked God.ttf') format('truetype');
+}
+
+.lavishly-yours-regular {
+  font-family: "Lavishly Yours", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*body styles*/
+body {
+  font-family: 'Inkedgod', Arial;
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container for the form to fit most screen sizes */
+#birthday-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  /* Form container takes extra width on small screens */
+  #birthday-form {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  /* Adjust greeting text */
+  p {
+    font-size: 24px;
+    width: 95%;
+  }
+
+  /* Scale down the ring element */
+  .ring {
+    max-width: 95%;
+  }
+
+  /* Login inputs and container scaling */
+  .login {
+    gap: 10px;
+  }
+
+  .login .inputBx input {
+    font-size: 1em;
+  }
+
+  /* Adjust birthday container and its elements */
+  .birthday {
+    font-size: 1em;
+  }
+
+  .birthday input {
+    font-size: 14px;
+    line-height: 20px;
+    /* Optionally adjust the custom width variables if needed */
+    --w: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Further scale text for extra small devices */
+  p {
+    font-size: 20px;
+  }
+  
+  .login .inputBx input {
+    font-size: 0.9em;
+  }
+  
+  .birthday {
+    font-size: 0.9em;
+  }
+}
+
+
+/* p/greetings Gradient animated text styles */
+p {
+  /* Use the accent colors in a smooth gradient.
+     The order below goes from dark brown to peach. Adjust as necessary. */
+  background: linear-gradient(
+      270deg,
+      var(--accent4), /* Dark Brown */
+      var(--accent2), /* Dark Cherry Red */
+      var(--accent3), /* Maroon */
+      var(--accent5), /* Puce */
+      var(--accent6), /* Blush Pink */
+      var(--accent7)  /* Peach */
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 10s ease infinite;
+  padding: 15px 20px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  box-shadow: #fff 0px 0px 20px, #000 0px 0px 40px;
+  box-sizing: border-box;
+  width: 80%;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 0 20px #00000099;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+} 
+
+/* animated ring styles*/
+.ring {
+  position: relative;
+  width: calc(100% + 20px);
+  max-width: calc(500px + 20px);
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -10px; /* Centers the larger ring relative to the form */
+}
+.ring i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  transition: 0.5s;
+}
+.ring i:nth-child(1) {
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  animation: animate 6s linear infinite;
+}
+.ring i:nth-child(2) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate 4s linear infinite;
+}
+.ring i:nth-child(3) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate2 10s linear infinite;
+}
+.ring:hover i {
+  border: 6px solid var(--clr);
+  filter: drop-shadow(0 0 20px var(--clr));
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animate2 {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+.login {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: fit-content;
+  text-shadow: #ff5100 0px 0px 100px, #000 0px 0px 40px;
+  overflow:visible;
+  position: absolute;
+  align-items: center;
+  gap: 20px;
+}
+.login .inputBx {
+  position: relative;
+  width: 100%;
+}
+
+.login .inputBx input {
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  font-size: 1.2em;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: normal;
+  text-align: center;
+}
+
+.login .inputBx input[type="submit"] {
+  font-family: "Lavishly Yours", cursive;
+  background: transparent;
+  font-size: 32px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login .inputBx input[type="submit"]:hover {
+  background: #42ee42;
+  color: #000;
+}
+
+
+.login .inputBx input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+
+
+.birthday {
+  width: 100%;
+  border: 2px solid #fff;
+  border-radius: 40px;  /* update from 8px to 40px */
+  font-size: 1.2em;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: normal;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: var(--background);
+  transition: box-shadow .3s;
+
+
+  font-family: 'Roboto', Arial;
+  --background: #0000;
+  --border: #000;
+  --border-width: 1px;
+  --border-focus: #0077ff;
+  --border-focus-width: 2px;
+  --text: #ffffff;
+  --text-placeholder: #999fb7;
+  --default: #0077ff;
+  --smoke: var(--text-placeholder);
+  --error: #ff5252;
+  
+  
+}
+
+.birthday .icon,
+.birthday .icon svg {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+
+.birthday .icon {
+  top: 12px;
+  left: 12px;
+}
+
+.birthday .icon svg {
+  top: 0;
+  left: 0;
+  opacity: var(--o, 1);
+  transform: scale(var(--s, 0));
+  color: var(--c, var(--default));
+  transition: color .3s, transform .2s, opacity .2s;
+}
+
+.birthday .normal {
+  opacity: var(--o, 1);
+  transform: scale(var(--s, 1));
+  transition: transform .2s, opacity .2s;
+}
+
+.birthday .normal svg.cake-smoke {
+  --s: 1;
+  --c: var(--smoke);
+}
+
+.birthday .normal svg.cake-smoke path {
+  --size: 11px;
+  stroke-dasharray: var(--size);
+  stroke-dashoffset: var(--offset, calc(var(--size) * 3));
+  transition: stroke-dashoffset var(--d, 0s);
+}
+
+.birthday .normal svg.cake-smoke path:nth-child(2) {
+  --size: 8px;
+}
+
+.birthday .normal svg.cake-smoke path:nth-child(3) {
+  --size: 4px;
+}
+
+.birthday .normal svg.cake-light,
+.birthday .normal svg.cake {
+  --s: 1;
+}
+
+.birthday .zodiac div {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/165585/zodiac-signs-sprite%402x.png');
+  background-size: auto 24px;
+  background-position: var(--offset) 0;
+  opacity: var(--o, 0);
+  transform: scale(var(--s, .6));
+  transition: transform .2s, opacity .2s;
+}
+
+.birthday input {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  margin: 0;
+  line-height: 24px;
+  padding: 12px var(--r, 0) 12px var(--l, 0);
+  width: var(--w, 22px);
+  color: var(--text);
+}
+
+.birthday input:first-of-type {
+  --w: 72px;
+  --l: 44px;
+}
+
+.birthday input:last-of-type {
+  --w: 64px;
+  --r: 24px;
+}
+
+/* Adjust month input width for DD/MM/YYYY */
+.birthday input.middle {
+    --w: 40px;
+}
+
+.birthday input::placeholder {
+  font-size: 15px;
+  color: var(--text-placeholder);
+}
+
+.birthday span {
+  display: block;
+  opacity: .4;
+  margin: -1px 3px 0 3px;
+  color: var(--text-placeholder);
+}
+
+.birthday .error-message {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: var(--o, 0);
+  color: var(--error);
+  transition: opacity .2s, transform .2s;
+  transform: translate(-50%, 4px) scale(var(--s, .8));
+}
+
+.birthday .error-message.show {
+  --s: 1;
+  --o: 1;
+}
+
+.birthday:focus-within {
+  --border: var(--border-focus);
+  --border-width: var(--border-focus-width);
+}
+
+.birthday:not(.error) .icon .normal.hide {
+  --o: 0;
+  --s: .6;
+}
+
+.birthday:not(.error) .icon .zodiac .show {
+  --o: 1;
+  --s: 1;
+}
+
+.birthday.error {
+  --border: var(--error);
+  --border-width: var(--border-focus-width);
+}
+
+.birthday.error .icon .normal {
+  --c: var(--error);
+}
+
+.birthday.error .icon .normal svg.cake-smoke path {
+  --d: .6s;
+  --offset: var(--size);
+}
+
+.birthday.error .icon .normal svg.cake-light {
+  --s: 0;
+}
+
