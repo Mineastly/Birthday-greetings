@@ -479,7 +479,8 @@ function smallBranchesSway() {
 // Initialize audio objects (ensure the audio files are in your project's root or adjust the path accordingly)
 var windAudio = new Audio('wind.mp3');
 windAudio.loop = true;
-var meowAudio = new Audio('happy birthday_meow.mp3');
+var meowAudio = new Audio('happy_birthday_meow.mp3');
 meowAudio.loop = true;
 meowAudio.play();  // Start happy birthday_meow.mp3 as the birthday animation starts
 anim();
+
