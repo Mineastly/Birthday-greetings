@@ -24,9 +24,28 @@ var hw = w / 2; // half-width
 var hh = h / 2;
 
 // Audio objects (looping). Do not auto-play immediately — start at proper times.
-var windAudio = new Audio('wind.mp3');
+// determine base path of this script so audio paths work on GitHub Pages (and encode spaces)
+var scriptEl = document.querySelector('script[src*="script.js"]');
+var scriptBase = scriptEl ? scriptEl.src.replace(/\/[^\/]*$/, '/') : './';
+function resolveAudioPath(name){ return encodeURI(scriptBase + name); }
+
+var windAudio = new Audio(resolveAudioPath('wind.mp3'));
 windAudio.loop = true;
+
+var meowAudio = new Audio(resolveAudioPath('happy birthday_meow.mp3'));
+meowAudio.loop = true;
+
+var meowAudioStarted = false;
 var windAudioStarted = false;
+
+// debug audio loading errors
+meowAudio.addEventListener('error', function(e){
+  console.error('meowAudio error loading', meowAudio.src, e);
+});
+windAudio.addEventListener('error', function(e){
+  console.error('windAudio error loading', windAudio.src, e);
+});
+meowAudio.addEventListener('canplaythrough', function(){ console.info('meowAudio ready', meowAudio.src); });
 
 // Animation configuration options.
 var opts = {
@@ -456,8 +475,10 @@ if (meowBtn) {
         meowAudioStarted = true;
         meowBtn.textContent = 'Pause Music';
         meowBtn.setAttribute('aria-pressed', 'true');
-      }).catch(function () {
-        // playback may still be blocked by browser policy
+      }).catch(function (err) {
+        console.error('meowAudio.play() failed', err, meowAudio.src);
+        // give a visible hint to the user if desired
+        // alert('Unable to play audio. Check console for details.');
       });
     } else {
       meowAudio.pause();
@@ -688,5 +709,4 @@ class Petal {
     this.flip += this.flipSpeed;
     this.draw();
   }
-
 }
