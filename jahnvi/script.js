@@ -42,45 +42,58 @@ windAudio.addEventListener('error', function(e){
 
 // Animation configuration options.
 var opts = {
+  // Text lines to display (three rows)
   strings: [ 'HAPPY', 'BIRTHDAY', 'JAHNVI' ],
+  // Base font size (pixels)
   charSize: 40,
   // Reduced spacing between characters (smaller = tighter)
   charSpacing: 20,
+  // Vertical distance between text lines
   lineHeight: 40,
+  // Center coordinates (will be recalculated on resize)
   cx: w / 2,
   cy: h / 2,
   
-  fireworkPrevPoints: 10,           // Trail points for fireworks effect.
-  fireworkBaseLineWidth: 5,         // Line width base value.
-  fireworkAddedLineWidth: 8,        // Additional random line width.
-  fireworkSpawnTime: 400,           // Increased delay before spawning fireworks
-  fireworkBaseReachTime: 60,        // Slower reach to target
-  fireworkAddedReachTime: 60,       // Additional reach time variance
-  fireworkCircleBaseSize: 20,       // Base size for explosion circle.
-  fireworkCircleAddedSize: 10,      // Random added size for circle.
-  fireworkCircleBaseTime: 60,       // Slower explosion circle growth
-  fireworkCircleAddedTime: 60,      // Explosion circle time variation
-  fireworkCircleFadeBaseTime: 20,   // Slower circle fade out
-  fireworkCircleFadeAddedTime: 10,  // Additional fade time variability
-  fireworkBaseShards: 5,            // Base shard count for explosion.
-  fireworkAddedShards: 5,           // Additional shard count.
-  fireworkShardPrevPoints: 3,       // Trail points for shards.
-  fireworkShardBaseVel: 4,          // Base velocity for shards.
-  fireworkShardAddedVel: 2,         // Additional shard velocity.
-  fireworkShardBaseSize: 3,         // Base shard size.
-  fireworkShardAddedSize: 3,        // Additional shard size.
-  gravity: .1,                    // Gravity effect on shards.
-  upFlow: -.1,                    // Upward force for balloons.
-  letterContemplatingWaitTime: 720, // Wait before balloon phase remains the same, or adjust if needed
-  balloonSpawnTime: 80,             // Increased delay before each balloon spawns (was 40)
-  balloonBaseInflateTime: 40,       // Slower inflation time for balloons (was 20)
-  balloonAddedInflateTime: 40,      // Increased variability in inflation time (was 20)
+  // Firework/trail configuration
+  fireworkPrevPoints: 10,           // Number of points used to draw the trailing line
+  fireworkBaseLineWidth: 5,         // Base stroke width for the trail
+  fireworkAddedLineWidth: 8,        // Random additional width applied per letter
+  // Timing values for the firework launch and reach (smaller = faster)
+  fireworkSpawnTime: 200,           // delay before a letter "spawns" (frames)
+  fireworkBaseReachTime: 40,        // base frames to reach final position
+  fireworkAddedReachTime: 40,       // variability added to reach time
+  // Explosion (circle) properties
+  fireworkCircleBaseSize: 20,       // base radius of the explosion circle
+  fireworkCircleAddedSize: 10,      // random extra radius
+  fireworkCircleBaseTime: 40,       // frames for circle growth
+  fireworkCircleAddedTime: 40,      // added variability for growth duration
+  // Fade timings for the explosion circle
+  fireworkCircleFadeBaseTime: 13,
+  fireworkCircleFadeAddedTime: 7,
+  // Shard (particle) config
+  fireworkBaseShards: 5,            // base number of shards per explosion
+  fireworkAddedShards: 5,           // extra random shards
+  fireworkShardPrevPoints: 3,       // trail length for each shard
+  fireworkShardBaseVel: 4,          // shard base velocity multiplier
+  fireworkShardAddedVel: 2,         // extra random velocity
+  fireworkShardBaseSize: 3,         // shard base size
+  fireworkShardAddedSize: 3,        // extra random shard size
+  // Physics
+  gravity: .1,                      // gravity applied to shards
+  upFlow: -.1,                      // slight upward acceleration for balloons
+  // How long to wait after explosion before balloon phase begins
+  letterContemplatingWaitTime: 1300, // smaller => balloons appear sooner
+  // Balloon timings (frames)
+  balloonSpawnTime: 53,             // delay before each balloon starts spawning
+  balloonBaseInflateTime: 27,       // frames to inflate a balloon
+  balloonAddedInflateTime: 27,      // variability for inflate time
+  // Balloon appearance and motion
   balloonBaseSize: 20,
   balloonAddedSize: 20,
-  balloonBaseVel: 0.2,              // Reduced base drift velocity (was 0.4)
-  balloonAddedVel: 0.2,             // Reduced additional drift velocity (was 0.4)
-  balloonBaseRadian: -( Math.PI / 2 - .5 ),  // Base angle for balloon movement.
-  balloonAddedRadian: -1,         // Angle randomness.
+  balloonBaseVel: 0.2,              // horizontal/vertical drift base velocity
+  balloonAddedVel: 0.2,             // added random drift velocity
+  balloonBaseRadian: -( Math.PI / 2 - .5 ),  // basic launch angle
+  balloonAddedRadian: -1,           // randomness in balloon's angle
 },
 calc = {
   // update totalWidth to match new spacing
@@ -485,7 +498,7 @@ const branchesRandomOrderRight = $('[id^=BranchGroup-right]').toArray().sort(fun
 
 // Make happy-birthday canvas animation 1.5x faster
 // (increase >1 -> faster). This divides time-related options by the factor.
-const HBD_SPEED = 1.5;
+const HBD_SPEED = 2.5;
 (function applyHbdSpeed() {
   if (!HBD_SPEED || HBD_SPEED === 1) return;
   const s = HBD_SPEED;
