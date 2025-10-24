@@ -26,9 +26,6 @@ var hh = h / 2;
 // Audio objects (looping). Do not auto-play immediately — start at proper times.
 var windAudio = new Audio('wind.mp3');
 windAudio.loop = true;
-var meowAudio = new Audio('happy birthday_meow.mp3');
-meowAudio.loop = true;
-var meowAudioStarted = false;
 var windAudioStarted = false;
 
 // Animation configuration options.
@@ -691,4 +688,5 @@ class Petal {
     this.flip += this.flipSpeed;
     this.draw();
   }
+
 }
