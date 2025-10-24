@@ -32,7 +32,7 @@ function resolveAudioPath(name){ return encodeURI(scriptBase + name); }
 var windAudio = new Audio(resolveAudioPath('wind.mp3'));
 windAudio.loop = true;
 
-var meowAudio = new Audio(resolveAudioPath('happy birthday_meow.mp3'));
+var meowAudio = new Audio(resolveAudioPath('happy_birthday_meows.mp3'));
 meowAudio.loop = true;
 
 var meowAudioStarted = false;
@@ -710,3 +710,4 @@ class Petal {
     this.draw();
   }
 }
+
